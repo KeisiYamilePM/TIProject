@@ -34,7 +34,7 @@ class ToDo(models.Model):
         return self.name
 
     def get_tags_display(self):
-        tags = [f'#{tag.name}' for tag in self.tags.all()]
+        tags = ['#{}'.format(tag.name) for tag in self.tags.all()]
 
         return ', '.join(tags)
 
