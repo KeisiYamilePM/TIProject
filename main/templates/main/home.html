@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+	
+<h1>ToDOs</h1>
+	<a href="/nuevo"><button type="button" class="btn btn-primary">Nuevo ToDo</button></a>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Creado</th>
+				<th>Estado</th>
+				<th>Etiquetas</th>
+				<th>Accciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for to_do in to_dos %}
+			<tr>
+				<td>{{ to_do.name }}</td>
+				<td>{{ to_do.created_at }}</td>
+				<td>{{ to_do.get_status_display }}</td>
+				<td>{{ to_do.get_tags_display }}</td>
+				<td>
+					{% if to_do.status != '3' %}
+					<a href="/change-status/?to_do_pk={{to_do.pk}}&status=3">
+						<button type="button" class="btn btn-success">Done</button>
+					</a>
+					{% endif %}
+					{% if to_do.status != '2' %}
+					<a href="/change-status/?to_do_pk={{to_do.pk}}&status=2">
+						<button type="button" class="btn btn-info">Doing</button>
+					</a>
+					{% endif %}
+					{% if to_do.status != '1' %}
+					<a href="/change-status/?to_do_pk={{to_do.pk}}&status=1">
+						<button type="button" class="btn btn-warning">To do</button>
+					</a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
